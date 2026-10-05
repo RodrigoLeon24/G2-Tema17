@@ -115,18 +115,7 @@ if "ano" in df.columns and anos_selecionados:
             anos_selecionados
         )
     ]
-
-
-if df_filtrado.empty:
-
-    st.warning(
-        "Nenhum registro encontrado para os filtros selecionados."
-    )
-
-    st.stop()
-
-st.sidebar.header("Filtros")
-
+    
 # Filtro de período
 
 anos_disponiveis = sorted(
@@ -161,8 +150,6 @@ nivel_selecionado = st.sidebar.multiselect(
 
 # Filtro de Período
 
-st.sidebar.header("Filtros")
-
 anos_disponiveis = sorted(
     df["ano"].dropna().unique()
 )
@@ -182,6 +169,16 @@ df_filtrado = df[
     (df["ano"] >= ano_inicio) &
     (df["ano"] <= ano_fim)
 ].copy()
+
+if df_filtrado.empty:
+
+    st.warning(
+        "Nenhum registro encontrado para os filtros selecionados."
+    )
+
+    st.stop()
+
+
 
 
 
