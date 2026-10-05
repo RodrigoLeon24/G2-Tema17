@@ -118,23 +118,44 @@ if "ano" in df.columns and anos_selecionados:
 
 # Filtro de nível econômico
 
-niveis = [
-    "Crise",
-    "Estabilidade",
-    "Crescimento"
-]
+if "nivel_economico" in df.columns:
 
-nivel_selecionado = st.sidebar.multiselect(
+    niveis = sorted(
+        df["nivel_economico"]
+        .dropna()
+        .unique()
+    )
+#niveis = [
+#    "Crise",
+#    "Estabilidade",
+#    "Crescimento"
+#]
+
+    nivel_selecionado = st.sidebar.multiselect(
     "Nível econômico",
     options=niveis,
     default=niveis
 )
 
-if df_filtrado.empty:
+else:
 
-    st.warning(
-        "Nenhum registro encontrado para os filtros selecionados."
-    )
+    nivel_selecionado = []
+
+df_filtrado = df.copy()
+
+if "nivel_economico" in df.columns and nivel_selecionado:
+
+    df_filtrado = df[
+        df["nivel_economico"].isin(
+            nivel_selecionado
+        )
+    ]
+
+#if df_filtrado.empty:
+
+#    st.warning(
+#        "Nenhum registro encontrado para os filtros selecionados."
+#    )
 
     st.stop()
 
