@@ -735,4 +735,16 @@ causalidade.
 A integração entre Pandas, SQLAlchemy, SQLite, Matplotlib, Seaborn e
 Streamlit transforma a base de dados em uma ferramenta interativa de
 análise econômica.
-""")
+"""
+)
+
+st.subheader(
+    "Créditos"
+)
+
+st.write("""
+Aluno: Rodrigo Leon de Andrade Silva
+Professor: Alexandre Neves Louzada
+Matéria: Linguagens de Programação
+"""
+)
