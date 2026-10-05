@@ -744,7 +744,9 @@ st.subheader(
 
 st.write("""
 Aluno: Rodrigo Leon de Andrade Silva
+         
 Professor: Alexandre Neves Louzada
+         
 Matéria: Linguagens de Programação
 """
 )
