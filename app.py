@@ -115,7 +115,7 @@ if "ano" in df.columns and anos_selecionados:
             anos_selecionados
         )
     ]
-    
+
 # Filtro de período
 
 anos_disponiveis = sorted(
@@ -146,29 +146,6 @@ nivel_selecionado = st.sidebar.multiselect(
     options=niveis,
     default=niveis
 )
-
-
-# Filtro de Período
-
-anos_disponiveis = sorted(
-    df["ano"].dropna().unique()
-)
-
-ano_inicio, ano_fim = st.sidebar.slider(
-    "Período",
-    min_value=int(min(anos_disponiveis)),
-    max_value=int(max(anos_disponiveis)),
-    value=(
-        int(min(anos_disponiveis)),
-        int(max(anos_disponiveis))
-    ),
-    step=1
-)
-
-df_filtrado = df[
-    (df["ano"] >= ano_inicio) &
-    (df["ano"] <= ano_fim)
-].copy()
 
 if df_filtrado.empty:
 
