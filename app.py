@@ -86,7 +86,6 @@ variáveis econômicas.
 
 st.sidebar.header("Filtros")
 
-
 # Filtro de ano
 if "ano" in df.columns:
 
@@ -125,11 +124,6 @@ if "nivel_economico" in df.columns:
         .dropna()
         .unique()
     )
-#niveis = [
-#    "Crise",
-#    "Estabilidade",
-#    "Crescimento"
-#]
 
     nivel_selecionado = st.sidebar.multiselect(
     "Nível econômico",
@@ -151,13 +145,13 @@ if "nivel_economico" in df.columns and nivel_selecionado:
         )
     ]
 
-#if df_filtrado.empty:
+if df_filtrado.empty:
 
-#    st.warning(
-#        "Nenhum registro encontrado para os filtros selecionados."
-#    )
+   st.warning(
+       "Nenhum registro encontrado para os filtros selecionados."
+    )
 
-    st.stop()
+st.stop()
 
 
 
