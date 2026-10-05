@@ -7,13 +7,15 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from sqlalchemy import create_engine
 
-#-------------------------------------------------------
+# CONFIGURAÇÃO DO STREAMLIT
 
 st.set_page_config(
     page_title="Dashboard de Indicadores Econômicos do Brasil",
     page_icon="📊",
     layout="wide"
 )
+
+# DIRETÓRIOS
 
 BASE_DIR = Path(__file__).parent
 
@@ -32,22 +34,31 @@ CAMINHO_BANCO = (
 
 sns.set_theme(style="whitegrid")
 
+# CARREGAMENTO DO CSV
 
 @st.cache_data
 def carregar_dados_csv():
 
     df = pd.read_csv(CAMINHO_DADOS)
 
-    # Garantir que o ano seja numérico
     if "ano" in df.columns:
+
         df["ano"] = pd.to_numeric(
             df["ano"],
             errors="coerce"
         )
 
-        df = df.sort_values("ano")
+    if "nivel_economico" in df.columns:
 
-    return df
+        df["nivel_economico"] = (
+            df["nivel_economico"]
+            .astype(str)
+            .str.strip()
+        )
+
+    return df.sort_values("ano")
+
+# CRIAÇÃO DO BANCO SQLITE
 
 def criar_banco_sqlite(df):
 
@@ -70,6 +81,7 @@ def criar_banco_sqlite(df):
 
 
 df = carregar_dados_csv()
+
 engine = criar_banco_sqlite(df)
 
 st.title(
