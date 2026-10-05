@@ -10,6 +10,8 @@ O projeto foi desenvolvido como avaliação G2 — Tema 17: Indicadores Econômi
 A aplicação permite analisar a evolução de indicadores econômicos, comparar variáveis, identificar períodos críticos e investigar possíveis relações entre diferentes aspectos da economia brasileira.
 
 ## Fluxo do projeto
+
+```
 simulacao_indicadores_economicos_brasil.csv
                     ↓
           Leitura e tratamento
@@ -28,30 +30,22 @@ simulacao_indicadores_economicos_brasil.csv
                     ↓
             Publicação online
          Streamlit Cloud / GitHub
+```
 
 ## 2. Problema de análise
 
 O projeto busca compreender o comportamento da economia brasileira entre 2015 e 2024 por meio da análise de diferentes indicadores econômicos.
 
-A aplicação procura responder às seguintes questões:
-
-Como o PIB evoluiu ao longo do período analisado?
-
-Existe relação entre inflação e desemprego?
-
-Quais períodos apresentaram maior crescimento econômico?
-
-Existe relação entre taxa de juros e consumo das famílias?
-
-Quais indicadores apresentaram maior instabilidade?
-
-Como a renda média evoluiu ao longo dos anos?
-
-Como o câmbio se comportou durante o período?
-
-Quais períodos podem ser considerados críticos para a economia brasileira?
-
-Quais relações podem ser observadas entre os principais indicadores econômicos?
+- A aplicação procura responder às seguintes questões:
+- Como o PIB evoluiu ao longo do período analisado?
+- Existe relação entre inflação e desemprego?
+- Quais períodos apresentaram maior crescimento econômico?
+- Existe relação entre taxa de juros e consumo das famílias?
+- Quais indicadores apresentaram maior instabilidade?
+- Como a renda média evoluiu ao longo dos anos?
+- Como o câmbio se comportou durante o período?
+- Quais períodos podem ser considerados críticos para a economia brasileira?
+- Quais relações podem ser observadas entre os principais indicadores econômicos?
 
 A análise dos dados permite transformar os valores da base em informações úteis para interpretação econômica e tomada de decisão.
 
