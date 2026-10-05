@@ -603,10 +603,13 @@ with aba5:
 
     st.subheader("Dados armazenados no SQLite")
 
-    consulta_dados = """
-    SELECT *
-    FROM indicadores_economicos
-    """
+    df_sqlite = pd.read_sql("SELECT * FROM indicadores", conn)
+
+
+#    consulta_dados = """
+#    SELECT *
+#    FROM indicadores_economicos
+#    """
 
     dados_sql = pd.read_sql(
         consulta_dados,
