@@ -145,18 +145,6 @@ if "nivel_economico" in df.columns and nivel_selecionado:
         )
     ]
 
-if df_filtrado.empty:
-
-   st.warning(
-       "Nenhum registro encontrado para os filtros selecionados."
-    )
-
-st.stop()
-
-
-
-
-
 def encontrar_coluna(possiveis_nomes):
 
     for coluna in df.columns:
