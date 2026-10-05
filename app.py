@@ -571,6 +571,46 @@ with aba4:
             "para realizar a consulta SQL."
         )
 
+engine = create_engine(
+    f"sqlite:///{CAMINHO_BANCO}"
+)
+
+df = pd.read_sql(
+    "SELECT * FROM indicadores_economicos",
+    engine
+)
+
+with aba5:
+
+    st.subheader("Dados armazenados no SQLite")
+
+    consulta_dados = """
+    SELECT *
+    FROM indicadores_economicos
+    """
+
+    dados_sql = pd.read_sql(
+        consulta_dados,
+        engine
+    )
+
+    col1, col2 = st.columns(2)
+
+    col1.metric(
+        "Registros",
+        len(dados_sql)
+    )
+
+    col2.metric(
+        "Colunas",
+        len(dados_sql.columns)
+    )
+
+    st.dataframe(
+        dados_sql,
+        use_container_width=True
+    )
+
 
 st.divider()
 
