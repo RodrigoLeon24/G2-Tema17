@@ -7,22 +7,6 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from sqlalchemy import create_engine
 
-conn = sqlite3.connect("database/indicadores_economicos.db")
-
-df_sqlite = pd.read_sql(
-    "SELECT * FROM indicadores",
-    conn
-)
-
-conn.close()
-
-if "nivel_economico" in df_sqlite.columns:
-    df_sqlite["nivel_economico"] = (
-        df_sqlite["nivel_economico"]
-        .astype(str)
-        .str.strip()
-    )
-
 #-------------------------------------------------------
 
 st.set_page_config(
