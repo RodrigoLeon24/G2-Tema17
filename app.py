@@ -497,39 +497,57 @@ with aba3:
 
 with aba4:
 
-    st.subheader(
-        "Consulta SQL com SQLAlchemy"
-    )
+    st.subheader("Consulta SQL com SQLAlchemy")
 
     st.write("""
-    Nesta seção, os dados tratados foram armazenados em um banco
-    SQLite utilizando SQLAlchemy.
-
-    A consulta abaixo demonstra como utilizar SQL para obter
-    indicadores econômicos diretamente da tabela.
+    Os dados tratados foram armazenados em um banco SQLite utilizando
+    SQLAlchemy. A consulta abaixo demonstra como utilizar SQL para
+    calcular os indicadores econômicos.
     """)
 
+    # Mostra as colunas realmente existentes na tabela
+    st.write("Colunas disponíveis na tabela:")
 
-    consulta = """
-    SELECT
-        AVG(pib) AS pib_medio,
-        AVG(inflacao) AS inflacao_media,
-        AVG(desemprego) AS desemprego_medio,
-        AVG(juros) AS juros_medio,
-        AVG(dolar) AS dolar_medio
-    FROM indicadores_economicos;
-    """
+    st.code(
+        ", ".join(df.columns),
+        language="text"
+    )
 
-    colunas_sql = [
-        coluna_pib,
-        coluna_inflacao,
-        coluna_desemprego,
-        coluna_juros,
-        coluna_dolar
-    ]
+    # Monta a consulta somente com colunas existentes
+    consultas = []
 
+    if coluna_pib:
+        consultas.append(
+            f'AVG("{coluna_pib}") AS pib_medio'
+        )
 
-    if all(colunas_sql):
+    if coluna_inflacao:
+        consultas.append(
+            f'AVG("{coluna_inflacao}") AS inflacao_media'
+        )
+
+    if coluna_desemprego:
+        consultas.append(
+            f'AVG("{coluna_desemprego}") AS desemprego_medio'
+        )
+
+    if coluna_juros:
+        consultas.append(
+            f'AVG("{coluna_juros}") AS juros_medio'
+        )
+
+    if coluna_dolar:
+        consultas.append(
+            f'AVG("{coluna_dolar}") AS dolar_medio'
+        )
+
+    if consultas:
+
+        consulta = f"""
+        SELECT
+            {", ".join(consultas)}
+        FROM indicadores_economicos;
+        """
 
         resultado_sql = pd.read_sql(
             consulta,
@@ -548,21 +566,11 @@ with aba4:
 
     else:
 
-        st.warning("""
-        A consulta SQL precisa ser ajustada aos nomes exatos
-        das colunas existentes no CSV.
-        """)
+        st.warning(
+            "Nenhuma coluna econômica foi identificada "
+            "para realizar a consulta SQL."
+        )
 
-with aba5:
-
-    st.subheader(
-        "Base de dados"
-    )
-
-    st.dataframe(
-        df_filtrado,
-        use_container_width=True
-    )
 
 st.divider()
 
