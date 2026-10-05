@@ -7,6 +7,24 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from sqlalchemy import create_engine
 
+conn = sqlite3.connect("database/indicadores_economicos.db")
+
+df_sqlite = pd.read_sql(
+    "SELECT * FROM indicadores",
+    conn
+)
+
+conn.close()
+
+if "nivel_economico" in df_sqlite.columns:
+    df_sqlite["nivel_economico"] = (
+        df_sqlite["nivel_economico"]
+        .astype(str)
+        .str.strip()
+    )
+
+#-------------------------------------------------------
+
 st.set_page_config(
     page_title="Dashboard de Indicadores Econômicos do Brasil",
     page_icon="📊",
@@ -86,7 +104,8 @@ variáveis econômicas.
 
 st.sidebar.header("Filtros")
 
-# Filtro de ano
+# FILTRO DE ANO
+
 if "ano" in df.columns:
 
     anos = sorted(
@@ -98,52 +117,62 @@ if "ano" in df.columns:
     anos_selecionados = st.sidebar.multiselect(
         "Ano",
         options=anos,
-        default=anos
+        default=anos,
+        key="filtro_ano"
     )
 
 else:
 
     anos_selecionados = []
 
-df_filtrado = df.copy()
-
-if "ano" in df.columns and anos_selecionados:
-
-    df_filtrado = df[
-        df["ano"].isin(
-            anos_selecionados
-        )
-    ]
-
-# Filtro de nível econômico
+# FILTRO DE NÍVEL ECONÔMICO
 
 if "nivel_economico" in df.columns:
 
     niveis = sorted(
         df["nivel_economico"]
         .dropna()
+        .astype(str)
+        .str.strip()
         .unique()
     )
 
     nivel_selecionado = st.sidebar.multiselect(
-    "Nível econômico",
-    options=niveis,
-    default=niveis
-)
+        "Nível econômico",
+        options=niveis,
+        default=niveis,
+        key="filtro_nivel"
+    )
 
 else:
 
     nivel_selecionado = []
 
+
 df_filtrado = df.copy()
 
-if "nivel_economico" in df.columns and nivel_selecionado:
 
-    df_filtrado = df[
-        df["nivel_economico"].isin(
-            nivel_selecionado
+if "ano" in df.columns and anos_selecionados:
+
+    df_filtrado = df_filtrado[
+        df_filtrado["ano"].isin(
+            anos_selecionados
         )
     ]
+
+
+if (
+    "nivel_economico" in df.columns
+    and nivel_selecionado
+):
+
+    df_filtrado = df_filtrado[
+        df_filtrado["nivel_economico"]
+        .astype(str)
+        .str.strip()
+        .isin(nivel_selecionado)
+    ]
+
 
 def encontrar_coluna(possiveis_nomes):
 
@@ -603,36 +632,91 @@ with aba5:
 
     st.subheader("Dados armazenados no SQLite")
 
-    df_sqlite = pd.read_sql("SELECT * FROM indicadores", conn)
+    st.write("""
+    Esta aba apresenta os dados armazenados no banco SQLite.
+    Os filtros selecionados no painel lateral são aplicados
+    aos dados antes da exibição.
+    """)
 
+    consulta_dados = """
+        SELECT *
+        FROM indicadores_economicos
+    """
 
-#    consulta_dados = """
-#    SELECT *
-#    FROM indicadores_economicos
-#    """
-
-    dados_sql = pd.read_sql(
+    df_sqlite = pd.read_sql(
         consulta_dados,
         engine
     )
 
-    col1, col2 = st.columns(2)
+    if "nivel_economico" in df_sqlite.columns:
+
+        df_sqlite["nivel_economico"] = (
+            df_sqlite["nivel_economico"]
+            .astype(str)
+            .str.strip()
+        )
+
+
+    df_sqlite_filtrado = df_sqlite.copy()
+
+
+    # Filtro de ano
+
+    if (
+        "ano" in df_sqlite_filtrado.columns
+        and anos_selecionados
+    ):
+
+        df_sqlite_filtrado = (
+            df_sqlite_filtrado[
+                df_sqlite_filtrado["ano"].isin(
+                    anos_selecionados
+                )
+            ]
+        )
+
+
+    # Filtro de nível econômico
+
+    if (
+        "nivel_economico" in df_sqlite_filtrado.columns
+        and nivel_selecionado
+    ):
+
+        df_sqlite_filtrado = (
+            df_sqlite_filtrado[
+                df_sqlite_filtrado["nivel_economico"]
+                .astype(str)
+                .str.strip()
+                .isin(nivel_selecionado)
+            ]
+        )
+
+    col1, col2, col3 = st.columns(3)
 
     col1.metric(
         "Registros",
-        len(dados_sql)
+        len(df_sqlite_filtrado)
     )
 
     col2.metric(
         "Colunas",
-        len(dados_sql.columns)
+        len(df_sqlite_filtrado.columns)
     )
+
+    col3.metric(
+        "Registros no banco",
+        len(df_sqlite)
+    )
+
+
+    st.divider()
 
     st.dataframe(
-        dados_sql,
-        use_container_width=True
+        df_sqlite_filtrado,
+        use_container_width=True,
+        hide_index=True
     )
-
 
 st.divider()
 
