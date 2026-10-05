@@ -392,7 +392,7 @@ jupyter notebook
 
 Depois acesse:
 
-notebooks/analise_indicadores_economicos.ipynb
+'notebooks/analise_indicadores_economicos.ipynb'
 
 
 Também é possível abrir o arquivo utilizando VS Code ou Google Colab.
