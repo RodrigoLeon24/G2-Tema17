@@ -71,7 +71,7 @@ df = carregar_dados_csv()
 engine = criar_banco_sqlite(df)
 
 st.title(
-    "Dashboard de Indicadores Econômicos do Brasil"
+    "Indicadores Econômicos do Brasil"
 )
 
 st.write("""
