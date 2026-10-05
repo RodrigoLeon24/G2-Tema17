@@ -146,14 +146,14 @@ projeto-indicadores-economicos/
 
 Descrição dos principais arquivos
 Arquivo/Pasta	Função
-app.py	Aplicação principal em Streamlit
-requirements.txt	Dependências do projeto
-README.md	Documentação do projeto
-index.html	Página de apresentação para GitHub Pages
-dados/	Armazenamento da base de dados
-database/	Banco de dados SQLite
-notebooks/	Notebook de análise exploratória
-imagens/	Imagens utilizadas na documentação
+`app.py`	Aplicação principal em Streamlit
+`requirements.txt`	Dependências do projeto
+`README.md`	Documentação do projeto
+`index.html`	Página de apresentação para GitHub Pages
+`dados/`	Armazenamento da base de dados
+`database/`	Banco de dados SQLite
+`notebooks/`	Notebook de análise exploratória
+`imagens/`	Imagens utilizadas na documentação
 ## 7. Dashboard
 
 O dashboard foi desenvolvido utilizando Streamlit e permite explorar os indicadores econômicos de forma interativa.
@@ -301,20 +301,20 @@ O projeto também utiliza um banco de dados SQLite para demonstrar a persistênc
 
 O banco está localizado em:
 
-database/indicadores_economicos.sqlite
+`database/indicadores_economicos.sqlite`
 
 
 A tabela principal utilizada pela aplicação é:
 
-indicadores_economicos
+`indicadores_economicos`
 
 
 A integração é realizada utilizando SQLAlchemy.
 
 Exemplo da consulta utilizada:
 
-SELECT *
-FROM indicadores_economicos;
+`SELECT *
+FROM indicadores_economicos;`
 
 
 Também são realizadas consultas agregadas para calcular médias dos indicadores econômicos.
@@ -323,8 +323,7 @@ Também são realizadas consultas agregadas para calcular médias dos indicadore
 
 O notebook está localizado em:
 
-notebooks/analise_indicadores_economicos.ipynb
-
+`notebooks/analise_indicadores_economicos.ipynb`
 
 O notebook apresenta as etapas de análise exploratória dos dados.
 
@@ -352,7 +351,7 @@ Conclusão.
 
 ## 14. Como executar localmente
 #### 14.1 Clonar o repositório
-git clone https://github.com/RodrigoLeon24/g2-tema17.git
+`git clone https://github.com/RodrigoLeon24/g2-tema17.git`
 
 
 Depois entre na pasta:
@@ -363,22 +362,22 @@ cd g2-tema17
 
 Execute:
 
-pip install -r requirements.txt
+`pip install -r requirements.txt`
 
 
 As principais bibliotecas utilizadas são:
 
-pandas
-matplotlib
-seaborn
-streamlit
-sqlalchemy
+`pandas`
+`matplotlib`
+`seaborn`
+`streamlit`
+`sqlalchemy`
 
 #### 14.3 Executar o dashboard
 
 Execute:
 
-streamlit run app.py
+`streamlit run app.py`
 
 
 O Streamlit abrirá o dashboard no navegador.
@@ -387,12 +386,12 @@ O Streamlit abrirá o dashboard no navegador.
 
 Para abrir o notebook utilizando Jupyter:
 
-jupyter notebook
+`jupyter notebook`
 
 
 Depois acesse:
 
-'notebooks/analise_indicadores_economicos.ipynb'
+`notebooks/analise_indicadores_economicos.ipynb`
 
 
 Também é possível abrir o arquivo utilizando VS Code ou Google Colab.
@@ -419,15 +418,15 @@ Utilizado para disponibilizar uma página de apresentação do projeto.
 
 Arquivo:
 
-index.html
+`index.html`
 
-Streamlit Cloud
+`Streamlit Cloud`
 
 Utilizado para disponibilizar o dashboard de forma online.
 
 O aplicativo é executado a partir do arquivo:
 
-app.py
+`app.py`
 
 ## 16. Entregas do projeto
 
@@ -449,7 +448,7 @@ Base de dados utilizada 'https://github.com/RodrigoLeon24/G2-Tema17/blob/main/da
 
 O projeto considera os seguintes aspectos:
 
-Tratamento dos dados
+## Tratamento dos dados
 
 Verificação, limpeza, conversão de tipos e preparação da base para análise.
 
@@ -457,19 +456,19 @@ Verificação, limpeza, conversão de tipos e preparação da base para análise
 
 Cálculo de indicadores relevantes para interpretação econômica.
 
-Visualizações
+## Visualizações
 
 Utilização de gráficos adequados para representar tendências, comparações e relações entre variáveis.
 
-Dashboard
+## Dashboard
 
 Desenvolvimento de uma aplicação interativa utilizando Streamlit.
 
-Interpretação
+## Interpretação
 
 Análise dos resultados encontrados e identificação de tendências e períodos críticos.
 
-Organização
+## Organização
 
 Estruturação profissional dos arquivos, banco de dados, notebook e documentação.
 
