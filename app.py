@@ -125,6 +125,65 @@ if df_filtrado.empty:
 
     st.stop()
 
+st.sidebar.header("Filtros")
+
+# Filtro de período
+
+anos_disponiveis = sorted(
+    df["ano"].dropna().unique()
+)
+
+ano_inicio, ano_fim = st.sidebar.slider(
+    "Período",
+    min_value=int(min(anos_disponiveis)),
+    max_value=int(max(anos_disponiveis)),
+    value=(
+        int(min(anos_disponiveis)),
+        int(max(anos_disponiveis))
+    ),
+    step=1
+)
+
+# Filtro de nível econômico
+
+niveis = [
+    "Crise",
+    "Estabilidade",
+    "Crescimento"
+]
+
+nivel_selecionado = st.sidebar.multiselect(
+    "Nível econômico",
+    options=niveis,
+    default=niveis
+)
+
+
+# Filtro de Período
+
+st.sidebar.header("Filtros")
+
+anos_disponiveis = sorted(
+    df["ano"].dropna().unique()
+)
+
+ano_inicio, ano_fim = st.sidebar.slider(
+    "Período",
+    min_value=int(min(anos_disponiveis)),
+    max_value=int(max(anos_disponiveis)),
+    value=(
+        int(min(anos_disponiveis)),
+        int(max(anos_disponiveis))
+    ),
+    step=1
+)
+
+df_filtrado = df[
+    (df["ano"] >= ano_inicio) &
+    (df["ano"] <= ano_fim)
+].copy()
+
+
 
 def encontrar_coluna(possiveis_nomes):
 
