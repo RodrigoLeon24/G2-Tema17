@@ -1,5 +1,9 @@
 # G2-Tema17
 
+### **Nome:** Rodrigo Leon de Andrade Silva
+### **Professor:** Alexandre Neves Louzadas
+### **Matéria:** Linguagens de Programação
+
 ## Dashboard de Indicadores Econômicos do Brasil
 ## 1. Descrição do projeto
 
